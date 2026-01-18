@@ -205,7 +205,7 @@ function render(data){
     <div class="profile">
       <div class="avatar">${esc(initials)}</div>
       <div>
-        <div class="profile-name">${esc(p["Prefix"] ? p["Prefix"] + " " : "")}${esc(p["Name"])}</div>
+        <div class="profile-name">${esc(p["Name"])}</div>
         <div class="profile-email">${esc(data.email)}</div>
         <div class="meta">
           <div class="meta-item">User ID: ${esc(p["User ID"])}</div>
@@ -213,7 +213,7 @@ function render(data){
       </div>
     </div>
     <div class="divider"></div>
-    <h3>Enrolled Levels</h3>
+    <h3>Enrolled Courses</h3>
   `;
 
   rec.forEach(r => {
@@ -247,7 +247,7 @@ function load(email, firstName="", lastName=""){
     .then(r => r.json())
     .then(data => {
       if (!data.records || data.records.length === 0) {
-        el("status").textContent = "No Class Enrolled";
+        el("status").textContent = "No Course Enrolled";
         el("content").style.display = "block";
         el("content").innerHTML = `
           <a class="btn" href="https://www.getitrightladies.com/explore-courses" target="_blank">
