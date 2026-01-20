@@ -95,6 +95,31 @@
       font-size:13px;
     }
 
+    .tier-badge {
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:8px 12px;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .tier-badge.premium {
+      background:linear-gradient(135deg, #FFD700, #FFA500);
+      border:2px solid #FFD700;
+      color:#000;
+      font-weight:800;
+      box-shadow:0 4px 12px rgba(255, 215, 0, 0.4);
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+    }
+
+    .tier-badge.standard {
+      background:#f8fafc;
+      border:1px solid var(--border);
+      color:var(--muted);
+    }
+
     .divider {
       height:1px;
       background:var(--border);
@@ -201,6 +226,11 @@ function render(data){
     .slice(0,2)
     .toUpperCase();
 
+  // Get tier from first record (all records should have same tier for a user)
+  const tier = p["Tier"] || "STANDARD";
+  const tierClass = tier === "PREMIUM" ? "premium" : "standard";
+  const tierDisplay = tier === "PREMIUM" ? "🏆 PREMIUM" : "STANDARD";
+
   let html = `
     <div class="profile">
       <div class="avatar">${esc(initials)}</div>
@@ -209,6 +239,7 @@ function render(data){
         <div class="profile-email">${esc(data.email)}</div>
         <div class="meta">
           <div class="meta-item">User ID: ${esc(p["User ID"])}</div>
+          <div class="tier-badge ${tierClass}">Tier: ${tierDisplay}</div>
         </div>
       </div>
     </div>
